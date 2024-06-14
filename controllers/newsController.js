@@ -1,4 +1,4 @@
-import { countNews, createService,findByIdService,getAllService,searchByTitleService,topNewsService } from "../services/news.service.js"
+import { byUserService, countNews, createService,findByIdService,getAllService,searchByTitleService,topNewsService } from "../services/news.service.js"
 
 const create = async (req,res) => {
 
@@ -197,6 +197,38 @@ const searchByTitle = async (req, res, next) => {
     }
 };
 
+
+const byUser = async (req,res,next) => {
+
+try {
+    const{ id } = req.params
+    const news = await byUserService(id)  
+
+
+    const formattedNews = news.map(item => ({
+        _id: item._id,
+        title: item.title,
+        text: item.text,
+        banner: item.banner,
+        likes: item.likes,
+        comments: item.comments,
+        user: {
+            name: item.user.name,
+            userName: item.user.userName,
+            avatar: item.user.avatar
+        }
+    }));
+
+    return res.status(200).json({
+        news: formattedNews
+    });
+
+} catch (error) {
+    console.log(error)
+}
+
+}
+
 export default searchByTitle;
 
 
@@ -205,5 +237,6 @@ export {
     create,
     topNews,
     findById,
-    searchByTitle
+    searchByTitle,
+    byUser
 };

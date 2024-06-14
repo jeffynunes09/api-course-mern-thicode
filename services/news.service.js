@@ -22,7 +22,10 @@ const searchByTitleService = (title) => {
     .populate('user');
 };
 
+const byUserService = (id) => News.find({
+    user: id
+}).sort({_id: -1}).populate('user')
 
 
 export {
-    createService,countNews,getAllService,topNewsService,findByIdService,searchByTitleService}
+    byUserService, createService,countNews,getAllService,topNewsService,findByIdService,searchByTitleService}
