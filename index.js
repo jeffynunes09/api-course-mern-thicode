@@ -2,8 +2,8 @@ import express, { json } from 'express';
 const app = express()
 
 import routerUser from './routes/routes.user.js';
-import routerAuth from '.routes/auth.user.js';
-import newsRoute from '.routes/news.route.js'
+import routerAuth from './routes/auth.user.js';
+import newsRoute from './routes/news.route.js'
 const port = 3000
 
 app.use(json());
