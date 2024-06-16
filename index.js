@@ -1,5 +1,6 @@
 import express, { json } from 'express';
 const app = express()
+import swaggerRouter from '../backend/routes/swagger.route.js'
 import routerUser from '../backend/routes/routes.user.js';
 import routerAuth from '../backend/routes/auth.user.js';
 import newsRoute from '../backend/routes/news.route.js'
@@ -15,6 +16,7 @@ app.get('/home', (req, res) => {
 app.use('/news',newsRoute)
 app.use('/user', routerUser)
 app.use('/auth', routerAuth)
+app.use('/doc',swaggerRouter)
 //CONEXÃO COM O MONGO DB
 import connect from "./DB/dataBase.js";
 connect()
