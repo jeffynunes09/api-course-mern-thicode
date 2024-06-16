@@ -17,11 +17,8 @@
       {
         "url": "http://localhost:3001",
         "description": "Local"
-      },
-      {
-        "url": "https://breakingnews.herokuapp.com",
-        "description": "Heroku"
       }
+   
     ],
     "paths": {
       "/user/create": {
