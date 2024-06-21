@@ -1,4 +1,5 @@
 import express, { json } from 'express';
+import cors from 'cors'
 const app = express()
 
 import routerUser from './routes/routes.user.js';
@@ -6,7 +7,19 @@ import routerAuth from './routes/auth.user.js';
 import newsRoute from './routes/news.route.js'
 const port = 3000
 
-app.use(json());
+
+
+// Configuração do CORS
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: [ 'POST','GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  };
+
+
+
+  app.use(json());
+  app.use(cors(corsOptions))
 
 //TESTE
 app.get('/home', (req, res) => {

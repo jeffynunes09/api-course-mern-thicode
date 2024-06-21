@@ -45,7 +45,7 @@ const getAll = async (req, res) => {
         offset = Number(offset);
 
         if(!limit) {
-            limit = 5
+            limit = 0
         }
         if(!offset){
             
@@ -68,7 +68,7 @@ const getAll = async (req, res) => {
             });
         }
 
-        res.status(200).json({
+        res.status(200).send({
             nextUrl,
             previousUrl,
             limit,
@@ -105,7 +105,7 @@ const topNews = async(req,res,next) => {
  }
 
  res.status(200).json({
-    news: {
+    
         
             _id: news._id,
             title: news.title,
@@ -117,7 +117,7 @@ const topNews = async(req,res,next) => {
                 name: news.user.name,
                 userName: news.user.userName,
                 avatar: news.user.avatar
-            }
+            
     }
  })}
 
