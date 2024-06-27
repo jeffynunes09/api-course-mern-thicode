@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+ 
   },
   "author": "Jefferson Nunes",
   "license": "ISC",
