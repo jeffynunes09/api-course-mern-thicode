@@ -1,16 +1,24 @@
-import Usuario from "../models/UserModel.js"
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-dotenv.config({ path: './.env' })
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import "dotenv/config";
+import userRepositories from "../repositories/user.repositories.js";
 
-
-
-const loginService = (email) => Usuario.findOne({email:email}).select('+password')    
-
-// GERANDO TOKEN              PAYLOAD ID        /       CHAVE       /       TEMPO
-const generateToken = (id) => jwt.sign({id:id}, process.env.SECRET, { expiresIn: 84600 })
-
-export {
-    loginService,
-    generateToken
+function generateToken(id) {
+  return jwt.sign({ id: id }, process.env.SECRET, { expiresIn: 86400 });
 }
+
+const loginService = async ({ email, password }) => {
+  const user = await userRepositories.findByEmailUserRepository(email);
+
+  if (!user) throw new Error("Wrong password or username");
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) throw new Error("Invalid password");
+
+  const token = generateToken(user.id);
+
+  return token;
+};
+
+export default { loginService, generateToken };

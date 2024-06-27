@@ -1,26 +1,12 @@
+import mongoose from "mongoose";
 
+const connectDatabase = () => {
+  console.log("Wait connecting to the database...");
 
-//CONEXÃO COM BANCO
-import { set, connect } from 'mongoose'
-import dotenv from 'dotenv'
-dotenv.config({ path: './.env' })
+  mongoose
+    .connect( process.env.DATABASE)
+    .then(() => console.log("MongoDB Atlas Connected!"))
+    .catch((err) => console.log(`Error connecting to MongoDB Atlas: ${err}`));
+};
 
-
-async function main(){
-try {
-    set("strictQuery", true)
-await connect(process.env.DATABASE)
-console.log("Conexão com banco funcionando")
-} catch (error) {
-
-console.error(`Error ${error}`)
-
-}
-
-}
-
-export default main
-
-
-
-
+export default connectDatabase;

@@ -1,48 +1,32 @@
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import { findByIdService } from '../services/user.service.js';
+import "dotenv/config";
+import jwt from "jsonwebtoken";
+import userRepositories from "../repositories/user.repositories.js";
 
-dotenv.config();
+function authMiddleware(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader)
+    return res.status(401).send({ message: "The token was not informed!" });
 
-export const authMiddleware = (req, res, next) => {
-    
-  const { authorization } = req.headers;
+  const parts = authHeader.split(" "); /* ["Bearer", "asdasdasdadsadasd"] */
+  if (parts.length !== 2)
+    return res.status(401).send({ message: "Invalid token!" });
 
-  if (!authorization) {
+  const [scheme, token] = parts;
 
-    return res.status(401).json({ message: 'Authorization header missing!' });
-  }
+  if (!/^Bearer$/i.test(scheme))
+    return res.status(401).send({ message: "Malformatted Token!" });
 
-  const parts = authorization.split(' ');
+  jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+    if (err) return res.status(401).send({ message: "Invalid token!" });
 
-  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    const user = await userRepositories.findByIdUserRepository(decoded.id);
+    if (!user || !user.id)
+      return res.status(401).send({ message: "Invalid token!" });
 
-    return res.status(401).json({ message: 'Token format invalid!' });
-  }
+    req.userId = user.id;
 
-  const token = parts[1];
-  
-  jwt.verify(token, process.env.SECRET, async (error, decoded) => {
-
-    if (error) {
-
-      return res.status(401).json({ message: 'Token invalid!' });
-    }
-
-    try {
-      const user = await findByIdService(decoded.id);
-
-      if (!user || !user.id) {
-
-        return res.status(401).json({ message: 'Invalid Token!' });
-      }
-      req.userId = user.id;  
-
-     return next();
-
-    } catch (err) {
-
-      return res.status(500).json({ message: 'Internal server error!' });
-    }
+    return next();
   });
-};
+}
+
+export default authMiddleware;
