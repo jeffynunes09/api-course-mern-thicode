@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "start": "cd ../frontend && npm start",
+  "scripts": {nodemon app.js}",
     "server": "nodemon app.js",
     "dev": "concurrently \"npm run server\" \"npm start \""
   },
