@@ -1,21 +1,21 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Breaking News API Documentation",
+    "title": "JN News API Documentation",
     "description": "In this documentation you will be able to consult the API end-points and also test all available routes. Do not forget to register and carry out the authorization.",
     "contact": {
-      "email": "docencia.thiago@gmail.com"
+      "email": "nunesjefferson425@gmail.com"
     },
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://api-breakingnews.onrender.com",
+      "url":"",
       "description": "Render"
     },
 
     {
-      "url": "http://localhost:3000",
+      "url": "http://localhost:3001",
       "description": "Local"
     },
     {
