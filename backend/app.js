@@ -12,7 +12,7 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 const app = express();
 const corsOptions = {
-    origin: ['http://localhost:5173','https://front-course-merne-thic-git-fb98d6-jeffersons-projects-a8e3c90e.vercel.app/','https://vercel.com/jeffersons-projects-a8e3c90e/front-course-merne-thicode','https://front-course-merne-thicode.vercel.app/'],
+    origin: ['https://front-course-merne-thic-git-fb98d6-jeffersons-projects-a8e3c90e.vercel.app/','https://vercel.com/jeffersons-projects-a8e3c90e/front-course-merne-thicode','https://front-course-merne-thicode.vercel.app/'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     optionsSuccessStatus: 200 // Para suportar navegadores mais antigos
   };
