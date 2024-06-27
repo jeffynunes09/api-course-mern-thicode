@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start":  "node --no-warnings app.js",
-    "server": "nodemon app.js",
-    "dev": "concurrently \"npm run server\" \"npm start \""
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "author": "Jefferson Nunes",
   "license": "ISC",
