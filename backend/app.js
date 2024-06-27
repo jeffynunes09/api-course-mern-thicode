@@ -12,7 +12,7 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 const app = express();
 const corsOptions = {
-    origin:[ 'http://localhost:5173','https://front-course-merne-thicode.vercel.app','https://api-course-mern-thicode-git-main-jeffersons-projects-a8e3c90e.vercel.app/','https://api-course-mern-thicode-e9le8yohd-jeffersons-projects-a8e3c90e.vercel.app/'],
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     optionsSuccessStatus: 200 // Para suportar navegadores mais antigos
   };
